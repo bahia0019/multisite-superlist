@@ -1,6 +1,6 @@
 const siteList = () => {
     const networkUrl = msl_localize_scripts.networkUrl
-    const networkAdmin = networkUrl + "/wp-admin/network"
+    const networkAdmin = networkUrl + "wp-admin/network"
 
     fetch(networkUrl + "/wp-json/msl/v1/sites")
         .then(function (response) {
@@ -82,7 +82,7 @@ const siteList = () => {
         const listItem = document.createElement("li")
         listItem.className = "site"
         listItem.innerHTML =
-            '<div><div class="ico"><img src="https://flauntsites.com/wp-content/uploads/2020/03/FlauntSitesIcon.png" /></div>' +
+            '<div><div class="ico"><img src="'+sites[i][1].favicon+'" /></div>' +
             '<a class="site" href="' +
             sites[i][1].siteurl +
             '/wp-admin">' +
