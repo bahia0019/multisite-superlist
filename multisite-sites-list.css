@@ -1,0 +1,91 @@
+#wpadminbar ul .sites-list {
+    display: flex;
+    flex-direction: column;
+    background: #464b50;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    height: 100vh;
+    white-space: nowrap;
+}
+
+#wp-admin-bar-my-sites li {
+    display: none;
+}
+
+#wp-admin-bar-my-sites:hover li {
+    display: block;
+}
+
+#wpadminbar ul .sites-list li {
+    border-bottom: 1px solid #222;
+    width: max-content;
+    min-width: 100%;
+}
+#wpadminbar ul .sites-list li.site-network {
+    background-color: #32373c;
+}
+
+#wpadminbar ul .sites-list li a {
+    height: initial;
+}
+
+#wpadminbar ul .sites-list li div {
+    display: grid;
+    grid-template-columns: 20px 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "ico site site"
+        "ico dashboard visit";
+    padding: 1em;
+}
+
+#wpadminbar ul .sites-list li.site-network div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+#wpadminbar ul .sites-list li.search div {
+    display: block;
+}
+
+#wpadminbar ul .sites-list li.search div input {
+    width: 100%;
+    text-indent: 10px;
+}
+
+#wpadminbar ul .sites-list li.site-network div #network {
+    grid-column: 1 / 6;
+}
+
+#wpadminbar ul .sites-list li .ico {
+    grid-area: ico;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 0;
+}
+
+#wpadminbar ul .sites-list li .ico img {
+    width: 100%;
+    padding: 0;
+}
+
+#wpadminbar ul .sites-list li .site {
+    grid-area: site;
+    padding: 0;
+}
+
+#wpadminbar ul .sites-list li .dashboard {
+    grid-area: dashboard;
+    padding: 0;
+}
+
+#wpadminbar ul .sites-list li .visit {
+    grid-area: visit;
+    padding: 0;
+}
+
+#wpadminbar ul .sites-list li:last-child {
+    padding: 0 1em 10vh;
+}
