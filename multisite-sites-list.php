@@ -24,18 +24,23 @@ function msl_scripts() {
 	wp_enqueue_script( 'msl-js', plugin_dir_url( __FILE__ ) . 'multisite-sites-list.js', array(), date( 'Ymd' ), true );
 
 	wp_localize_script( 'msl-js', 'msl_localize_scripts', array(
-		'networkUrl' => network_home_url( '', 'https' ),
+		'networkUrl' => trailingslashit(network_home_url( '', 'https' )),
 	));
-
 }
 add_action( 'admin_enqueue_scripts', 'msl_scripts' );
 
 
-function my_api_custom_route_sites( $user ) {
+function my_api_custom_route_sites($user) {
 
-	$sites = get_blogs_of_user( $user );
+	$sites = get_blogs_of_user($user);
+
+	foreach($sites as $k => $site)
+	{
+		$fallback = '';
+		$sites[$k]->favicon = get_site_icon_url(25,$fallback,$site->site_id);
+	}
 	return $sites;
-}
+}	
 
 add_action('rest_api_init', function() {
 	register_rest_route('msl/v1', '/sites', [
@@ -43,3 +48,6 @@ add_action('rest_api_init', function() {
 		'callback' => 'my_api_custom_route_sites',
 	]);
 });
+
+	
+
