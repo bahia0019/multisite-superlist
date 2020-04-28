@@ -7,7 +7,7 @@
 -   That said, the Sites List has a lot of potential, and I wanted to improve upon it. The ideas I had were:
 -   It should scroll through ALL the sites.
 -   It should have useful links without submenus.
--   It should have a search feature like the very cool plugin[https://github.com/trepmal/my-sites-search](My Sites Search) by [https://github.com/trepmal](Kailey Lampert)
+-   It should have a search feature like the very cool plugin [My Sites Search](https://github.com/trepmal/my-sites-search) by [Kailey Lampert](https://github.com/trepmal)
 
 [![Demonstration of Multisite Sites List in action](multisite-sites-list.gif)]()
 
@@ -38,4 +38,4 @@
 
 ## Contact
 
--   Create issues here, or hit me up on Twitter [https://twitter.com/williambay](@williambay)
+-   Create issues here, or hit me up on Twitter [@williambay](https://twitter.com/williambay)
