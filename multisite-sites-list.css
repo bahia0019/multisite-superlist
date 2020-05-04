@@ -1,91 +1,61 @@
-#wpadminbar ul .sites-list {
-    display: flex;
+#wp-admin-bar-my-sites > .ab-sub-wrapper {
+    /* display: flex !important; */
+    height: 100vh;
     flex-direction: column;
-    background: #464b50;
     overflow-y: scroll;
-    overflow-x: hidden;
     position: absolute;
     height: 100vh;
-    white-space: nowrap;
 }
 
-#wp-admin-bar-my-sites li {
+#wp-admin-bar-my-sites .ab-sub-wrapper ul li .ab-sub-wrapper {
+    display: inherit;
+    position: relative;
+    height: auto;
+}
+
+#wp-admin-bar-my-sites .ab-sub-wrapper ul li .ab-sub-wrapper ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+ul#wp-admin-bar-network-admin-default {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr !important;
+    display: grid;
+}
+
+ul#wp-admin-bar-my-sites-list .menupop .ab-sub-wrapper .ab-submenu li {
+    display: flex;
+    position: relative;
+    margin: 5px 0 5px;
+}
+
+.menupop li#wp-admin-bar-network-admin.hover > .ab-sub-wrapper,
+.menupop li#wp-admin-bar-network-admin:hover > .ab-sub-wrapper {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+}
+
+.ab-sub-secondary li.hover .ab-sub-wrapper,
+.ab-sub-secondary li:hover .ab-sub-wrapper {
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+}
+
+#wpadminbar #wp-admin-bar-my-sites a.ab-item,
+#wpadminbar #wp-admin-bar-site-name a.ab-item {
+    min-width: inherit;
+}
+
+#wpadminbar #wp-admin-bar-my-sites a.ab-item span.wp-admin-bar-arrow:before,
+#wpadminbar #wp-admin-bar-site-name a.ab-item span.wp-admin-bar-arrow:before {
     display: none;
 }
 
-#wp-admin-bar-my-sites:hover li {
-    display: block;
+#search div {
+    padding: 5px;
 }
 
-#wpadminbar ul .sites-list li {
-    border-bottom: 1px solid #222;
-    width: max-content;
-    min-width: 100%;
-}
-#wpadminbar ul .sites-list li.site-network {
-    background-color: #32373c;
-}
-
-#wpadminbar ul .sites-list li a {
-    height: initial;
-}
-
-#wpadminbar ul .sites-list li div {
-    display: grid;
-    grid-template-columns: 20px 1fr 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-        "ico site site"
-        "ico dashboard visit";
-    padding: 1em;
-}
-
-#wpadminbar ul .sites-list li.site-network div {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-
-#wpadminbar ul .sites-list li.search div {
-    display: block;
-}
-
-#wpadminbar ul .sites-list li.search div input {
+input#sites-search {
     width: 100%;
     text-indent: 10px;
-}
-
-#wpadminbar ul .sites-list li.site-network div #network {
-    grid-column: 1 / 6;
-}
-
-#wpadminbar ul .sites-list li .ico {
-    grid-area: ico;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 0;
-}
-
-#wpadminbar ul .sites-list li .ico img {
-    width: 100%;
-    padding: 0;
-}
-
-#wpadminbar ul .sites-list li .site {
-    grid-area: site;
-    padding: 0;
-}
-
-#wpadminbar ul .sites-list li .dashboard {
-    grid-area: dashboard;
-    padding: 0;
-}
-
-#wpadminbar ul .sites-list li .visit {
-    grid-area: visit;
-    padding: 0;
-}
-
-#wpadminbar ul .sites-list li:last-child {
-    padding: 0 1em 10vh;
 }
