@@ -4,14 +4,14 @@
  * Plugin Name:       Multisites Sites List
  * GitHub Plugin URI: https://github.com/bahia0019/multisite-sites-list
  * Description:       Replaces My Sites list with a scrollable/searchable list of Sites.
- * Version:           2.0.0
+ * Version:           2.0.1
  * Author:            William Bay | Flaunt Your Site
  * Author URI:        http://flauntyoursite.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       multisite-sites-list
  */
- 
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -55,7 +55,6 @@ function check_user() {
 		}
 		add_action( 'admin_enqueue_scripts', 'msl_scripts' );
 
-
 		/**
 		 * Removes items from the site list items.
 		 */
@@ -70,22 +69,21 @@ function check_user() {
 		}
 		add_action( 'admin_bar_menu', 'msl_remove_nodes', 999 );
 
-
 		/**
 		 * Define the REST routes.
 		 */
 		function my_api_custom_route_sites() {
 
 			$args = array(
-				'number'    => 100,
+				'number' => 100,
 			// TODO Pagination
 			);
 
-			$sites        = get_sites( $args );
-			$data         = array();
-			$i            = 0;
-			$main_favicon = get_site_icon_url();
-			$site_mapped_domain =  get_option( 'wu_custom-domain' );
+			$sites              = get_sites( $args );
+			$data               = array();
+			$i                  = 0;
+			$main_favicon       = get_site_icon_url();
+			$site_mapped_domain = get_option( 'wu_custom-domain' );
 			// TODO Determine WP Ultimo Mapped Domain.
 
 			foreach ( $sites as $site ) {
@@ -108,7 +106,7 @@ function check_user() {
 			register_rest_route(
 				'msl/v1',
 				'sites/',
-				//TODO 'sites/(?P<page>[1-9]{1,2})',
+				// TODO 'sites/(?P<page>[1-9]{1,2})',
 				array(
 					'methods'  => 'GET',
 					'callback' => 'my_api_custom_route_sites',

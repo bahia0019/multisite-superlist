@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/all_in_one_file.css",
+    "main.js": "/static/js/all_in_one_file.js",
+    "main.js.map": "/static/js/all_in_one_file.js.map",
+    "index.html": "/index.html",
+    "static/css/all_in_one_file.css.map": "/static/css/all_in_one_file.css.map",
+    "static/js/all_in_one_file.js.LICENSE.txt": "/static/js/all_in_one_file.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/css/all_in_one_file.css",
+    "static/js/all_in_one_file.js"
+  ]
+}

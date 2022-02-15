@@ -35,6 +35,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1]
+### Changed
+-Removed Build folder from the Gitignore file.
+
 ## [2.0]
 ### Changed
 -Refactored over to React & REST API.
