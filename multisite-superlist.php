@@ -1,15 +1,15 @@
 <?php
 /**
  * @wordpress-plugin
- * Plugin Name:       Multisites Sites List
- * GitHub Plugin URI: https://github.com/bahia0019/multisite-sites-list
+ * Plugin Name:       Multisites SuperList
+ * GitHub Plugin URI: https://github.com/bahia0019/multisite-superlist
  * Description:       Replaces My Sites list with a scrollable/searchable list of Sites.
- * Version:           2.0.1
+ * Version:           2.1.0
  * Author:            William Bay | Flaunt Your Site
  * Author URI:        http://flauntyoursite.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       multisite-sites-list
+ * Text Domain:       multisite-superlist
  */
 
 // If this file is called directly, abort.
@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-$version = '2.0.0';
+$version = '2.1.0';
 
 /**
  * Checks user to determine if plugin should run.
@@ -55,19 +55,28 @@ function check_user() {
 		}
 		add_action( 'admin_enqueue_scripts', 'msl_scripts' );
 
+		// /**
+		// * Removes items from the site list items.
+		// */
+		// function msl_remove_nodes( $wp_admin_bar ) {
+
+		// $sites = get_sites();
+		// foreach ( $sites as $site ) {
+		// $wp_admin_bar->remove_node( 'blog-' . $site->blog_id . '-n' );
+		// $wp_admin_bar->remove_node( 'blog-' . $site->blog_id . '-c' );
+		// }
+
+		// }
+		// add_action( 'admin_bar_menu', 'msl_remove_nodes', 999 );
+
 		/**
-		 * Removes items from the site list items.
+		 * Remove the default WP Admin Bar My Sites menu.
+		 *
+		 * @return void
 		 */
-		function msl_remove_nodes( $wp_admin_bar ) {
-
-			$sites = get_sites();
-			foreach ( $sites as $site ) {
-				$wp_admin_bar->remove_node( 'blog-' . $site->blog_id . '-n' );
-				$wp_admin_bar->remove_node( 'blog-' . $site->blog_id . '-c' );
-			}
-
+		function action_add_admin_bar_menus() {
+			remove_action( 'admin_bar_menu', 'wp_admin_bar_my_sites_menu', 20 );
 		}
-		add_action( 'admin_bar_menu', 'msl_remove_nodes', 999 );
 
 		/**
 		 * Define the REST routes.
