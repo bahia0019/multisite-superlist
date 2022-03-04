@@ -35,6 +35,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.2]
+
+### Changed
+
+-Added padding to UL bottom to access last Site.
+
 ## [2.1.1]
 
 ### Changed

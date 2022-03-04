@@ -4,7 +4,7 @@
  * Plugin Name:       Multisites SuperList
  * GitHub Plugin URI: https://github.com/bahia0019/multisite-superlist
  * Description:       Replaces My Sites list with a scrollable/searchable list of Sites.
- * Version:           2.1.1
+ * Version:           2.1.2
  * Author:            William Bay | Flaunt Your Site
  * Author URI:        http://flauntyoursite.com
  * License:           GPL-2.0+
@@ -12,12 +12,14 @@
  * Text Domain:       multisite-superlist
  */
 
+define( 'VERSION', '2.1.2' );
+
+
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-
-$version = '2.1.1';
 
 /**
  * Checks user to determine if plugin should run.
@@ -42,8 +44,8 @@ function mssl_check_user() {
 			$react_app_js  = plugin_dir_url( __FILE__ ) . 'msl/build/static/js/all_in_one_file.js';
 			$react_app_css = plugin_dir_url( __FILE__ ) . 'msl/build/static/css/all_in_one_file.css';
 
-			wp_enqueue_style( 'msl-styles', $react_app_css, array(), $version );
-			wp_enqueue_script( 'msl-js', $react_app_js, array(), $version, true );
+			wp_enqueue_style( 'msl-styles', $react_app_css, array(), VERSION );
+			wp_enqueue_script( 'msl-js', $react_app_js, array(), VERSION, true );
 
 			wp_localize_script(
 				'msl-js',
