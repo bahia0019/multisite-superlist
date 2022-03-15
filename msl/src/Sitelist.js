@@ -9,6 +9,8 @@ const mslSiteInfo = msl_site_info
 const networkURL =  `${mslSiteInfo.site_url}/wp-admin/network/`
 const sitesEndpoint = `${mslSiteInfo.site_url}/wp-json/msl/v1/sites`
 const mySites = document.querySelector('#wp-admin-bar-my-sites a');
+const search = document.querySelector("#search")
+const newSearchItems = []
 // TODO Pagination const TOTAL_PAGES = 30;
 
 // TODO The loading spinner.
@@ -27,27 +29,34 @@ const mySites = document.querySelector('#wp-admin-bar-my-sites a');
 // Outputs the site list.
 function Sitelist () {
 
-  const [sites, setSites]         = React.useState([]);
+  const [sites, setSites]                 = React.useState([]);
+  const [searchInput, setSearchInput]     = useState('');
+  const [filteredSites, setFilteredSites] = useState([]);
+
   const [isLoading, setIsLoading] = React.useState(false);
   const [hasMore, setHasMore]     = React.useState(true);
   const [pages, setPages]         = React.useState(1);
 
-  React.useEffect(() => {
-    getSites(pages);
-    setPages((pages) => pages + 1);
-  }, []);
 
-  const getSites = async (page) => {
-    setIsLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+useEffect(() => {
+  axios.get(sitesEndpoint)
+      .then((response) => {
+        setSites(response.data);
+      })
+      .catch(function (error) {
+      console.log(error);
+      })
+}, [])
 
-    await axios.get(sitesEndpoint)
-    .then(resp => {
-        setSites([...sites, ...resp.data])
-        setIsLoading(false)
-    });
+const searchItems = (searchValue) => {
+  setSearchInput(searchValue)
+  if ( "" !== searchInput){
+    const filteredData = sites.filter((site) => {
+        return Object.values(site.name).join('').toLowerCase().includes(searchInput.toLowerCase())
+      })
+      setFilteredSites(filteredData)
   } 
-
+}
 
   return (
     <Fragment>
@@ -62,10 +71,26 @@ function Sitelist () {
             <li><a href={networkURL + "plugins.php"}>Plugins</a></li>
             <li><a href={networkURL + "settings.php"}>Settings</a></li>
           </ul>
+          <input id="search" type="text" placeholder="Search for your site" onChange={ (e) => searchItems(e.target.value)} />
         </div>
 
         <ul id="sites">
-            {sites.map( 
+          {searchInput.length > 1 ? (
+            filteredSites.map( 
+              site => { 
+              return (
+                  <li key={site.site_id} class="site">
+                  <img src={site.favicon} id="msl-favicon" alt=""/> 
+                  <a href={site.url + '/'} id="msl-sitename" >{site.name}</a>
+                  <a href={site.url + '/wp-admin/'}>Dashboard</a>
+                  <a href={site.url + '/'}>Visit Site</a>
+                  <a href={site.url + '/wp-admin/post-new.php'}>New Post</a>
+                  <a href={site.url + '/wp-admin/post-new.php?post_type=page'}>New Page</a>
+                  <a href={site.url + '/wp-admin/plugins.php'}>Plugins</a>
+                </li> 
+              )
+            })) : (
+            sites.map( 
               site => {
                 return (
                   <li key={site.site_id} class="site">
@@ -79,7 +104,7 @@ function Sitelist () {
                   </li>  
                 )
               }
-            )}
+            ))}
         </ul>
         {/* TODO {isLoading && <Loader />} */}
       </div>

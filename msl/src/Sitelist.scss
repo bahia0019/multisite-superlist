@@ -20,7 +20,6 @@
       border: 1px solid rgba(0,0,0,.50);
       background-color: rgba(0,0,0,.20);
       display: grid;
-      display: grid;
       grid-template-columns: 32px repeat(5, max-content);
       grid-template-rows: 1fr 1fr;
       &:hover{
@@ -57,12 +56,19 @@
 
 #network-admin{
   background-color: darkslateblue;
+  padding:10px;
     link{
       font-weight: bold;
     }
     ul{
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr !important;
       display: grid;
+    }
+    #search{
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      margin-top: 5px;
     }
 }
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @wordpress-plugin
- * Plugin Name:       Multisites SuperList
+ * Plugin Name:       Multisites SuperListhhh
  * GitHub Plugin URI: https://github.com/bahia0019/multisite-superlist
  * Description:       Replaces My Sites list with a scrollable/searchable list of Sites.
  * Version:           2.1.3
@@ -20,6 +20,19 @@ define( 'VERSION', '2.1.3' );
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+/**
+ * Get number of sites in network.
+ */
+function mssl_number_of_sites() {
+	$args = array(
+		'count' => true,
+	);
+	$number_of_sites = get_sites( $args );
+	define( 'NUMBER_OF_SITES', $number_of_sites );
+}
+add_action( 'init', 'mssl_number_of_sites' );
+
 
 /**
  * Checks user to determine if plugin should run.
@@ -71,7 +84,7 @@ function mssl_check_user() {
 		function mssl_api_custom_route_sites() {
 
 			$args = array(
-				'number' => 100,
+				'number' => NUMBER_OF_SITES,
 			// TODO Pagination
 			);
 
