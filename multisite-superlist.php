@@ -1,7 +1,7 @@
 <?php
 /**
  * @wordpress-plugin
- * Plugin Name:       Multisites SuperListhhh
+ * Plugin Name:       Multisites SuperList
  * GitHub Plugin URI: https://github.com/bahia0019/multisite-superlist
  * Description:       Replaces My Sites list with a scrollable/searchable list of Sites.
  * Version:           2.2.0
