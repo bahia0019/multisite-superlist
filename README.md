@@ -35,6 +35,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2.0]
+
+### Changed
+-Added Search.
+-Changed the quantity of sites from 100 to the exact number in network.
 
 ## [2.1.3]
 
