@@ -55,7 +55,7 @@ function mssl_check_user() {
 
 			// Build files.
 			$react_app_js  = plugin_dir_url( __FILE__ ) . 'msl/build/static/js/all_in_one_file.js';
-			$react_app_css = plugin_dir_url( __FILE__ ) . 'msl/build/static/css/all_in_one_file.css';
+			$react_app_css = plugin_dir_url( __FILE__ ) . 'msl/build/static/css/somecss.css';
 
 			wp_enqueue_style( 'msl-styles', $react_app_css, array(), VERSION );
 			wp_enqueue_script( 'msl-js', $react_app_js, array(), VERSION, true );
