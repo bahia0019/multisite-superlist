@@ -125,5 +125,7 @@ function mssl_check_user() {
 		add_action( 'rest_api_init', 'mssl_register_sites' );
 
 	}
+
+    // require_once plugin_dir_path( __FILE__ ) . 'inc/mssl-settings.php';
 }
 add_action( 'init', 'mssl_check_user' );
