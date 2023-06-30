@@ -39,14 +39,14 @@ add_action( 'init', 'mssl_number_of_sites' );
  */
 function mssl_check_user() {
 
-	if ( ! is_user_logged_in() || ! is_multisite() ) {
-		return;
-	}
+	// if ( ! is_user_logged_in() || ! is_multisite() ) {
+	// 	return;
+	// }
 
 	// If user doesn't have more than 1 site, or can't manage network, don't display the Multisite List.
-	if ( ! current_user_can( 'manage_network' ) ) {
-		return;
-	} else {
+	// if ( ! current_user_can( 'manage_network' ) ) {
+	// 	return;
+	// } else {
 
 		/**
 		 * Enqueues React static file for the App.
@@ -54,15 +54,15 @@ function mssl_check_user() {
 		function mssl_scripts() {
 
 			// Build files.
-			$react_app_js  = plugin_dir_url( __FILE__ ) . 'msl/build/static/js/all_in_one_file.js';
-			$react_app_css = plugin_dir_url( __FILE__ ) . 'msl/build/static/css/somecss.css';
+			$react_app_js  = plugin_dir_url( __FILE__ ) . 'mssl/build/static/js/all_in_one_file.js';
+			$react_app_css = plugin_dir_url( __FILE__ ) . 'mssl/build/static/css/somecss.css';
 
-			wp_enqueue_style( 'msl-styles', $react_app_css, array(), VERSION );
-			wp_enqueue_script( 'msl-js', $react_app_js, array(), VERSION, true );
+			wp_enqueue_style( 'mssl-styles', $react_app_css, array(), VERSION );
+			wp_enqueue_script( 'mssl-js', $react_app_js, array(), VERSION, true );
 
 			wp_localize_script(
-				'msl-js',
-				'msl_site_info',
+				'mssl-js',
+				'mssl_site_info',
 				array(
 					'site_url' => site_url(),
 				)
@@ -84,7 +84,7 @@ function mssl_check_user() {
 		function mssl_api_custom_route_sites() {
 
 			$args = array(
-				'number' => NUMBER_OF_SITES,
+				'number'     => NUMBER_OF_SITES,
 			// TODO Pagination
 			);
 
@@ -108,24 +108,61 @@ function mssl_check_user() {
 			return $data;
 		}
 
+
+		/**
+		 * Define the REST routes.
+		 */
+        function mssl_api_custom_route_settings() {
+            // $data['display_id'] = get_option( 'display-id' ); 
+            $data['display_id'] = 'true'; 
+            return $data;
+        }
+
 		/**
 		 * Register the site routes.
 		 */
 		function mssl_register_sites() {
 			register_rest_route(
-				'msl/v1',
+				'mssl/v1',
 				'sites/',
 				// TODO 'sites/(?P<page>[1-9]{1,2})',
 				array(
 					'methods'  => 'GET',
 					'callback' => 'mssl_api_custom_route_sites',
+                    // 'permission_callback' => function($request){
+                    //     return is_super_admin( get_current_user_id() ) ? '__return_true' : '__return_false';
+                    // },
 				)
 			);
 		}
 		add_action( 'rest_api_init', 'mssl_register_sites' );
 
+
+		/**
+		 * Register the site routes.
+		 */
+		function mssl_register_settings() {
+            register_rest_route(
+                'mssl/v1',
+                'settings/',
+                array(
+                    'methods'  => 'GET',
+                    'callback' => 'mssl_api_custom_route_settings',
+                    // 'permission_callback' => function($request){
+                    //     return is_super_admin( get_current_user_id() ) ? '__return_true' : '__return_false';
+                    // },
+                )
+            );
+		}
+		add_action( 'rest_api_init', 'mssl_register_settings' );
 	}
 
-    // require_once plugin_dir_path( __FILE__ ) . 'inc/mssl-settings.php';
-}
+    require_once plugin_dir_path( __FILE__ ) . 'inc/mssl-settings.php';
+    
+    function mssl_enqueue_admin_scripts(){
+        wp_enqueue_style( 'mssl-admin-styles', plugin_dir_url( __FILE__ ) . 'inc/mssl-settings.css', array(), VERSION );
+    }
+    add_action( 'admin_enqueue_scripts', 'mssl_enqueue_admin_scripts' );
+
+// }
 add_action( 'init', 'mssl_check_user' );
